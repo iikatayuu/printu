@@ -1,4 +1,5 @@
-api/data/
+api/data/*
+!api/data/.gitkeep
 api/config.inc.php
 
 /vendor/
