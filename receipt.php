@@ -3,6 +3,7 @@
 require_once './api/config.inc.php';
 require_once './api/database.php';
 require_once './api/pdf.php';
+require_once './api/utils.php';
 
 $id = !empty($_GET['id']) ? $conn->real_escape_string($_GET['id']) : null;
 if ($id === null) die('Invalid params');
@@ -47,27 +48,26 @@ if ($color_profile === 'Colored') {
 }
 
 $data = [
-  'data' =>   [
-    'attributes' => [
-      'amount' => $total * 1000 ,
-      'payment_method_allowed' => ['gcash'],
-      'payment_method_options' => [
-        'card' => [
-          'request_three_d_secure' => 'any'
-        ]
-      ],
-      'currency' => 'PHP',
-      'capture_type' => 'automatic',
-      'description' => 'Payment for printing',
-      'statement_descriptor' => 'PRINTU',
-      'metadata' => null
+  'currency' => 'PHP',
+  'amount' => $total,
+  'payment_method' => [
+    'type' => 'EWALLET',
+    'reusability' => 'ONE_TIME_USE',
+    'ewallet' => [
+      'channel_code' => 'GCASH',
+      'channel_properties' => [
+        'success_return_url' => "$xendit_success_url?id=$id",
+        'failure_return_url' => "$xendit_failure_url?id=$id"
+      ]
     ]
-  ]
+  ],
+  'customer_id' => guidv4(),
+  'metadata' => ['id' => $id]
 ];
 
-$token = base64_encode("$paymongo_secret_key:");
+$token = base64_encode("$xendit_secret_key:");
 $curl = curl_init();
-curl_setopt($curl, CURLOPT_URL, 'https://api.paymongo.com/v1/payment_intents');
+curl_setopt($curl, CURLOPT_URL, 'https://api.xendit.co/payment_requests');
 curl_setopt($curl, CURLOPT_POST, 1);
 curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -82,8 +82,9 @@ $output = curl_exec($curl);
 curl_close($curl);
 
 $json = json_decode($output);
-$pi = $json->data->id;
-$conn->query("UPDATE documents SET payment='$pi' WHERE id=$id");
+$payment = $json->id;
+$payment_url = $json->actions[0]->url;
+$conn->query("UPDATE documents SET payment='$payment' WHERE id=$id");
 
 ?>
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
@@ -138,7 +139,7 @@ $conn->query("UPDATE documents SET payment='$pi' WHERE id=$id");
       <h3 class="heading-3">Print Set-up Selected:</h3>
       <div class="text-block-17">No. of copies: <?= $no_of_copies ?><br>Color profile: <?= $color_profile ?><br>Pages per sheet: <?= $npps ?></div>
     </div><img src="images/receiptUntitled-2.png" loading="lazy" sizes="(max-width: 479px) 100vw, 450px" srcset="images/receiptUntitled-2-p-500.png 500w, images/receiptUntitled-2-p-800.png 800w, images/receiptUntitled-2-p-1080.png 1080w, images/receiptUntitled-2-p-1600.png 1600w, images/receiptUntitled-2.png 1800w" alt="" class="image-9">
-    <a href="#" id="proceed-gcash" class="button-6 w-button">Proceed to Payment</a><img src="images/gcash.png" loading="lazy" sizes="55px" srcset="images/gcash-p-500.png 500w, images/gcash.png 630w" alt="" class="image-10">
+    <a href="<?= $payment_url ?>" id="proceed-gcash" class="button-6 w-button">Proceed to Payment</a><img src="images/gcash.png" loading="lazy" sizes="55px" srcset="images/gcash-p-500.png 500w, images/gcash.png 630w" alt="" class="image-10">
     <div class="text-block-21">Date of transcation: <?= $date ?><br>OR #:</div>
     <div class="text-block-19">Item                                         Qty                Sub</div>
     <div class="text-block-18">Colored:                                                  <?= $colored ?>                           <?= $colored * 5 ?><br>Black and white:                                                      <?= $grayscaled ?>                           <?= $grayscaled * 3 ?><br>With half page image<br>with full page image</div>
@@ -146,11 +147,7 @@ $conn->query("UPDATE documents SET payment='$pi' WHERE id=$id");
     <h1 class="heading-4">Total: <?= $total ?></h1>
   </div>
   <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=63c2574b2405e7464ec569cc" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-  <script>const returnUrl = '<?= $return_url ?>';</script>
-  <script>const pk = '<?= $paymongo_public_key ?>';</script>
-  <script>const output = <?= $output ?>;</script>
   <script src="js/default.js"></script>
-  <script src="js/receipt.js"></script>
     <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
 </body>
 </html>

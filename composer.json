@@ -1,0 +1,9 @@
+{
+    "name": "printu/printu",
+    "description": "Printu is a start up cloud-based printing service which incorporates seamless transaction and convenient printing experience through Quick Response (QR) code.",
+    "type": "project",
+    "require": {
+        "phpmailer/phpmailer": "^6.7"
+    },
+    "license": "UNLICENSED"
+}
