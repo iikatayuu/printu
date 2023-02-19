@@ -49,11 +49,11 @@ if ($json->status === 'SUCCEEDED') {
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
     $mail->Port = 465;
 
-    $mail->setFrom(SMTP_FROM, 'BUGANA');
+    $mail->setFrom(SMTP_FROM, 'PRINTU');
     $mail->addAddress($email);
 
     $mail->isHTML(true);
-    $mail->Subject = 'Payment Received!';
+    $mail->Subject = 'Payment Successfully Received!';
     $mail->Body = $body;
 
     $mail->send();
