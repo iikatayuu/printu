@@ -3,12 +3,13 @@
 function get_pdf_pages ($path) {
   $pdfinfo = '';
   $os = '';
-  $bit = PHP_INT_SIZE === 4 ? '64' : '32';
+  $bit = PHP_INT_SIZE === 4 ? '32' : '64';
 
   if (PHP_OS === 'WINNT' || PHP_OS === 'Windows' || PHP_OS === 'WIN32') $os = 'win';
-  if (PHP_OS === 'LINUX') $os = 'linux';
+  if (PHP_OS === 'LINUX' || PHP_OS === 'Linux') $os = 'linux';
 
   $pdfinfo = __DIR__ . "/../bin/xpdf-tools-$os-4.04/bin$bit/pdfinfo";
+  chmod($pdfinfo, 0777);
   exec("$pdfinfo \"$path\"", $output);
 
   $pages = 0;
