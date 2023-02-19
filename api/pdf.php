@@ -28,9 +28,10 @@ function get_ink_coverage ($path) {
   $os = '';
 
   if (PHP_OS === 'WINNT' || PHP_OS === 'Windows' || PHP_OS === 'WIN32') $os = 'win';
-  if (PHP_OS === 'LINUX') $os = 'linux';
+  if (PHP_OS === 'LINUX' || PHP_OS === 'Linux') $os = 'linux';
 
   $cmd = __DIR__ . "/../bin/gs-$os/gs";
+  chmod($cmd, 0777);
   exec("$cmd -q -o - -sDEVICE=inkcov \"$path\"", $output);
 
   $pages = [];
