@@ -37,7 +37,7 @@ if ($json->status === 'SUCCEEDED') {
 
   $mail = new PHPMailer(true);
   $body = file_get_contents(__DIR__ . '/mail.html');
-  $body = str_replace('%HOSTNAME%', $origin, $body);
+  $body = str_replace('%ORIGIN%', $origin, $body);
   $body = str_replace('%TEXT%', urlencode("$origin/print.php?id=$id"), $body);
 
   try {
