@@ -1,16 +1,19 @@
 <?php
 
+define('SMTP_HOST', '');
+define('SMTP_USER', '');
+define('SMTP_PASS', '');
+define('SMTP_FROM', '');
+
 $mysql_host = 'localhost';
 $mysql_user = 'root';
 $mysql_pass = '';
 $mysql_database = 'printu';
 
-$paymongo_public_key = '';
-$paymongo_secret_key = '';
-$return_url = 'https://printu.org/redirect.php';
+$origin = 'https://printu.org';
 
 $xendit_secret_key = '';
-$xendit_success_url = 'http://localhost/success.php';
-$xendit_failure_url = 'http://localhost/failure.php';
+$xendit_success_url = 'http://printu/success.php';
+$xendit_failure_url = 'http://printu/failure.php';
 
 ?>
