@@ -12,6 +12,13 @@ $receipt = $receipt_res->fetch_object();
 $upload = $receipt->id;
 $upload_path = __DIR__ . "/api/data/$upload.pdf";
 
+header('Content-Description: File Transfer');
+header('Content-Type: application/pdf');
+header('Content-Disposition: attachment; filename="' . $upload . '.pdf"');
+header('Expires: 0');
+header('Cache-Control: must-revalidate');
+header('Pragma: public');
+header('Content-Length: ' . filesize($upload_path));
 readfile($upload_path);
 
 ?>
