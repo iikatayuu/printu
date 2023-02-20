@@ -7,9 +7,15 @@ $(document).ready(function () {
     return
   }
 
-  const url = window.location.origin + '/print.php?id=' + id
-  const element = $('#qrcode').get(0)
-  new QRCode(element, {
-    text: url
+  $.ajax('/api/getupload.php?id=' + id, {
+    method: 'get',
+    cache: true,
+    success: function (upload) {
+      const element = $('#qrcode').get(0)
+      new QRCode(element, { text: upload })
+    },
+    error: function () {
+      alert('Error loading document')
+    }
   })
 })

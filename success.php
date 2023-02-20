@@ -17,6 +17,7 @@ if ($receipt_res->num_rows === 0) die('Invalid params');
 $receipt = $receipt_res->fetch_object();
 $email = $receipt->email;
 $payment = $receipt->payment;
+$upload = $receipt->upload;
 $token = base64_encode("$xendit_secret_key:");
 $curl = curl_init();
 curl_setopt($curl, CURLOPT_URL, "https://api.xendit.co/payment_requests/$payment");
@@ -38,7 +39,7 @@ if ($json->status === 'SUCCEEDED') {
   $mail = new PHPMailer(true);
   $body = file_get_contents(__DIR__ . '/mail.html');
   $body = str_replace('%ORIGIN%', $origin, $body);
-  $body = str_replace('%TEXT%', urlencode("$origin/print.php?id=$id"), $body);
+  $body = str_replace('%TEXT%', urlencode($upload), $body);
 
   try {
     $mail->isSMTP();
