@@ -11,8 +11,7 @@ $(document).ready(function () {
     method: 'get',
     cache: true,
     success: function (upload) {
-      const element = $('#qrcode').get(0)
-      new QRCode(element, { text: upload })
+      $('#qrcode-img').attr('src', 'https://chart.googleapis.com/chart?chs=400x400&chld=H|0&cht=qr&choe=UTF-8&chl=' + upload)
     },
     error: function () {
       alert('Error loading document')
