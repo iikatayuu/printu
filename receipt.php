@@ -33,7 +33,8 @@ if ($color_profile === 'Grayscale') {
 }
 
 if ($color_profile === 'Colored') {
-  $ink_coverages = get_ink_coverage($upload_path);
+  $tmp_path = __DIR__ . "/api/data/$upload";
+  $ink_coverages = get_ink_coverage($upload_path, $tmp_path);
   foreach ($ink_coverages as $page) {
     if ($page === 'RGB') {
       $colored = ($colored + 1) * $no_of_copies;
