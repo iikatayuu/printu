@@ -69,7 +69,7 @@ function get_ink_coverage ($path, $tmp_path) {
       if ($percentage > 0.2) $is_colored = true;
     }
 
-    $output[] = $is_dark ? 'BW' : 'RGB';
+    $output[] = $is_colored ? 'RGB' : 'BW';
   }
 
   return $output;
