@@ -6,11 +6,16 @@ function get_pdf_pages ($path) {
   $pdfinfo = '';
   $os = '';
   $bit = PHP_INT_SIZE === 4 ? '32' : '64';
+  $ext = '';
 
-  if (PHP_OS === 'WINNT' || PHP_OS === 'Windows' || PHP_OS === 'WIN32') $os = 'win';
+  if (PHP_OS === 'WINNT' || PHP_OS === 'Windows' || PHP_OS === 'WIN32') {
+    $os = 'win';
+    $ext = '.exe';
+  }
+
   if (PHP_OS === 'LINUX' || PHP_OS === 'Linux') $os = 'linux';
 
-  $pdfinfo = __DIR__ . "/../bin/xpdf-tools-$os-4.04/bin$bit/pdfinfo";
+  $pdfinfo = __DIR__ . "/../bin/xpdf-tools-$os-4.04/bin$bit/pdfinfo$ext";
   chmod($pdfinfo, 0777);
   exec("$pdfinfo \"$path\"", $output);
 
@@ -30,11 +35,16 @@ function get_ink_coverage ($path, $tmp_path) {
   $pdftopng = '';
   $os = '';
   $bit = PHP_INT_SIZE === 4 ? '32' : '64';
+  $ext = '';
 
-  if (PHP_OS === 'WINNT' || PHP_OS === 'Windows' || PHP_OS === 'WIN32') $os = 'win';
+  if (PHP_OS === 'WINNT' || PHP_OS === 'Windows' || PHP_OS === 'WIN32') {
+    $os = 'win';
+    $ext = '.exe';
+  }
+
   if (PHP_OS === 'LINUX' || PHP_OS === 'Linux') $os = 'linux';
 
-  $pdftopng = __DIR__ . "/../bin/xpdf-tools-$os-4.04/bin$bit/pdftopng";
+  $pdftopng = __DIR__ . "/../bin/xpdf-tools-$os-4.04/bin$bit/pdftopng$ext";
   chmod($pdftopng, 0777);
   exec("$pdftopng \"$path\" \"$tmp_path\"");
 
@@ -47,17 +57,16 @@ function get_ink_coverage ($path, $tmp_path) {
     while (strlen($page_str) < 6) $page_str = "0$page_str";
 
     $colors = $extractor->Get_Color("$tmp_path-$page_str.png", 2, 1, 1, 24);
-    $is_dark = false;
+    $is_colored = false;
 
     foreach ($colors as $hex => $percentage) {
-      if (!$is_dark) break;
-
       $rgb = intval($hex, 16);
       $r = ($rgb >> 16) & 0xff;
       $g = ($rgb >> 8) & 0xff;
       $b = ($rgb >> 0) & 0xff;
       $luma = ((299 * $r) + (587 * $g) + (114 * $b)) / 1000;
-      if ($luma < 40) $is_dark = true;
+      if ($luma < 40 || $hex === 'ffffff') continue;
+      if ($percentage > 0.2) $is_colored = true;
     }
 
     $output[] = $is_dark ? 'BW' : 'RGB';
