@@ -2,15 +2,7 @@
 $(document).ready(function () {
   let uploadId = null
 
-  $('.w-file-remove-link').on('click', function () {
-    uploadId = null
-    $('.default-state').css('display', 'inline-block')
-    $('.uploading-state').css('display', 'none')
-    $('.w-file-upload-success').css('display', 'none')
-    $('.w-file-upload-error').css('display', 'none')
-  })
-
-  $('#file-2').on('change', function () {
+  $('#pdf-file').on('change', function () {
     const files = $(this).prop('files')
     if (files.length > 0) {
       const file = files[0]
@@ -43,7 +35,7 @@ $(document).ready(function () {
     }
   })
 
-  $('#wf-form-Print-Entry').on('submit', function (event) {
+  $('#form-submit').on('submit', function (event) {
     event.preventDefault()
 
     if (uploadId === null) {
