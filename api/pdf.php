@@ -42,12 +42,12 @@ function get_ink_coverage ($path, $tmp_path) {
   $pages = get_pdf_pages($path);
   $output = [];
 
-  for ($i = 0; $i < $pages; $i++) {
+  for ($i = 1; $i <= $pages; $i++) {
     $page_str = strval($i);
     while (strlen($page_str) < 6) $page_str = "0$page_str";
 
     $colors = $extractor->Get_Color("$tmp_path-$page_str.png", 2, 1, 1, 24);
-    $is_colored = false;
+    $is_dark = false;
 
     foreach ($colors as $hex => $percentage) {
       if (!$is_dark) break;
@@ -57,10 +57,10 @@ function get_ink_coverage ($path, $tmp_path) {
       $g = ($rgb >> 8) & 0xff;
       $b = ($rgb >> 0) & 0xff;
       $luma = ((299 * $r) + (587 * $g) + (114 * $b)) / 1000;
-      if ($luma >= 40) $is_colored = $is_colored || true;
+      if ($luma < 40) $is_dark = true;
     }
 
-    $output[] = $is_colored ? 'RGB' : 'BW';
+    $output[] = $is_dark ? 'BW' : 'RGB';
   }
 
   return $output;
