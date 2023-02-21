@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/colors.inc.php';
+
 function get_pdf_pages ($path) {
   $pdfinfo = '';
   $os = '';
@@ -23,32 +25,45 @@ function get_pdf_pages ($path) {
   return $pages;
 }
 
-function get_ink_coverage ($path) {
-  $pdfinfo = '';
+function get_ink_coverage ($path, $tmp_path) {
+  $base = basename($path);
+  $pdftopng = '';
   $os = '';
+  $bit = PHP_INT_SIZE === 4 ? '32' : '64';
 
   if (PHP_OS === 'WINNT' || PHP_OS === 'Windows' || PHP_OS === 'WIN32') $os = 'win';
   if (PHP_OS === 'LINUX' || PHP_OS === 'Linux') $os = 'linux';
 
-  $cmd = __DIR__ . "/../bin/gs-$os/gs";
-  chmod($cmd, 0777);
-  exec("$cmd -q -o - -sDEVICE=inkcov \"$path\"", $output);
+  $pdftopng = __DIR__ . "/../bin/xpdf-tools-$os-4.04/bin$bit/pdftopng";
+  chmod($pdftopng, 0777);
+  exec("$pdftopng \"$path\" \"$tmp_path\"");
 
-  $pages = [];
-  foreach ($output as $line) {
-    preg_match('/([0-9.]+)\s+([0-9.]+)\s+([0-9.]+)\s+([0-9.]+)\sCMYK OK/', $line, $matches);
-    $c = floatval($matches[1]);
-    $y = floatval($matches[2]);
-    $m = floatval($matches[3]);
-    $k = floatval($matches[4]);
-    if ($c + $y + $m > 0.5) {
-      $pages[] = 'RGB';
-    } else {
-      $pages[] = 'BW';
+  $extractor = new GetMostCommonColors();
+  $pages = get_pdf_pages($path);
+  $output = [];
+
+  for ($i = 0; $i < $pages; $i++) {
+    $page_str = strval($i);
+    while (strlen($page_str) < 6) $page_str = "0$page_str";
+
+    $colors = $extractor->Get_Color("$tmp_path-$page_str.png", 2, 1, 1, 24);
+    $is_colored = false;
+
+    foreach ($colors as $hex => $percentage) {
+      if (!$is_dark) break;
+
+      $rgb = intval($hex, 16);
+      $r = ($rgb >> 16) & 0xff;
+      $g = ($rgb >> 8) & 0xff;
+      $b = ($rgb >> 0) & 0xff;
+      $luma = ((299 * $r) + (587 * $g) + (114 * $b)) / 1000;
+      if ($luma >= 40) $is_colored = $is_colored || true;
     }
+
+    $output[] = $is_colored ? 'RGB' : 'BW';
   }
 
-  return $pages;
+  return $output;
 }
 
 ?>
