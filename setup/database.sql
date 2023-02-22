@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Feb 22, 2023 at 08:38 AM
+-- Generation Time: Feb 22, 2023 at 08:47 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -31,6 +31,7 @@ DROP TABLE IF EXISTS `documents`;
 CREATE TABLE IF NOT EXISTS `documents` (
   `id` int NOT NULL AUTO_INCREMENT COMMENT 'Document unique ID',
   `idnumber` varchar(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Student ID number',
+  `filename` text COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Document original filename',
   `copies` int NOT NULL COMMENT 'Number of copies to print',
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Student email address',
   `color` enum('RGB','BW') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Is document colored or black and white',

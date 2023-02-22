@@ -1,6 +1,7 @@
 
 $(document).ready(function () {
   let uploadId = null
+  let filename = ''
 
   $('#pdf-file').on('change', function () {
     const files = $(this).prop('files')
@@ -20,8 +21,9 @@ $(document).ready(function () {
         processData: false,
         success: function (data) {
           uploadId = data
+          filename = file.name
           $('.w-file-upload-success').css('display', 'inline-block')
-          $('.w-file-upload-file-name').text(file.name)
+          $('.w-file-upload-file-name').text(filename)
         },
         error: function () {
           $('.w-file-upload-error').css('display', 'inline-block')
@@ -47,6 +49,7 @@ $(document).ready(function () {
     const formdata = new FormData(form)
     formdata.delete('file-2')
     formdata.append('file', uploadId)
+    formdata.append('filename', filename)
 
     $.ajax('/api/submit.php', {
       method: 'post',
