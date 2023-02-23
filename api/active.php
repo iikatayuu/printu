@@ -6,7 +6,9 @@ $timestamp = time();
 $activepath = __DIR__ . '/active.txt';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $pass = isset($_POST['pass']) ? $_POST['pass'] : null;
+  $req_body = file_get_contents('php://input');
+  $post = json_decode($req_body, true);
+  $pass = isset($post['pass']) ? $post['pass'] : null;
   if ($pass === null) die('Invalid params');
 
   if ($pass === $active_pass) {
