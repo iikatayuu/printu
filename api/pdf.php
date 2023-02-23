@@ -30,8 +30,7 @@ function get_pdf_pages ($path) {
   return $pages;
 }
 
-function get_ink_coverage ($path, $tmp_path) {
-  $base = basename($path);
+function pdf_generate_images ($path, $tmp_path) {
   $pdftopng = '';
   $os = '';
   $bit = PHP_INT_SIZE === 4 ? '32' : '64';
@@ -47,7 +46,9 @@ function get_ink_coverage ($path, $tmp_path) {
   $pdftopng = __DIR__ . "/../bin/xpdf-tools-$os-4.04/bin$bit/pdftopng$ext";
   chmod($pdftopng, 0777);
   exec("$pdftopng \"$path\" \"$tmp_path\"");
+}
 
+function get_ink_coverage ($path, $tmp_path) {
   $extractor = new GetMostCommonColors();
   $pages = get_pdf_pages($path);
   $output = [];

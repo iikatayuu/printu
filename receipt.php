@@ -28,6 +28,9 @@ $pages = get_pdf_pages($upload_path);
 $total = 0;
 $colored = 0;
 $grayscaled = 0;
+$tmp_path = __DIR__ . "/api/data/$upload";
+
+pdf_generate_images($upload_path, $tmp_path);
 
 if ($color_profile === 'Grayscale') {
   $grayscaled = $pages * $no_of_copies;
@@ -35,7 +38,6 @@ if ($color_profile === 'Grayscale') {
 }
 
 if ($color_profile === 'Colored') {
-  $tmp_path = __DIR__ . "/api/data/$upload";
   $ink_coverages = get_ink_coverage($upload_path, $tmp_path);
   foreach ($ink_coverages as $page) {
     if ($page === 'RGB') {
