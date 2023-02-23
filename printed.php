@@ -6,6 +6,7 @@ require_once './api/utils.php';
 cors();
 
 $upload = !empty($_GET['upload']) ? $conn->real_escape_string($_GET['upload']) : null;
+$page = !empty($_GET['page']) ? intval($_GET['page']) : null;
 $hash = !empty($_GET['hash']) ? $conn->real_escape_string($_GET['hash']) : null;
 
 if ($upload === null || $hash === null) die('Invalid params');
@@ -19,7 +20,7 @@ $upload_path = __DIR__ . "/api/data/$upload.pdf";
 $hashfile = hash_file('md5', $upload_path);
 
 if ($hashfile === $hash) {
-  $conn->query("UPDATE documents SET printed=1 WHERE id=$id");
+  $conn->query("UPDATE documents SET printed=$page WHERE id=$id");
   echo 'success';
 } else {
   echo 'invalid hash';
