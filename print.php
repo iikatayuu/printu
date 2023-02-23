@@ -1,6 +1,9 @@
 <?php
 
 require_once './api/database.php';
+require_once './api/utils.php';
+
+cors();
 
 $upload = !empty($_GET['upload']) ? $conn->real_escape_string($_GET['upload']) : null;
 if ($upload === null) die('Invalid params');

@@ -1,6 +1,9 @@
 <?php
 
 require_once './api/database.php';
+require_once './api/utils.php';
+
+cors();
 
 $upload = !empty($_GET['upload']) ? $conn->real_escape_string($_GET['upload']) : null;
 $hash = !empty($_GET['hash']) ? $conn->real_escape_string($_GET['hash']) : null;
