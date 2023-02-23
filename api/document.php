@@ -16,6 +16,7 @@ $receipt = $receipt_res->fetch_object();
 header('Content-Type: application/json');
 echo json_encode([
   'idnumber' => $receipt->idnumber,
+  'filename' => $receipt->filename,
   'copies' => intval($receipt->copies),
   'email' => $receipt->email,
   'color' => $receipt->color,
