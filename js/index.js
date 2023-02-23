@@ -65,4 +65,27 @@ $(document).ready(function () {
       }
     })
   })
+
+  function updateStatus () {
+    $.ajax('/api/active.php', {
+      method: 'get',
+      cache: false,
+      success: function (data) {
+        if (data === 'active') {
+          $('.text-block-6').css({
+            width: '',
+            'background-color': ''
+          }).text('Available')
+        } else {
+          $('.text-block-6').css({
+            width: '175px',
+            'background-color': 'red'
+          }).text('Not Available')
+        }
+      }
+    })
+  }
+
+  updateStatus()
+  setInterval(updateStatus, 300000)
 })

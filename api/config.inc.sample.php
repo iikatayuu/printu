@@ -11,6 +11,7 @@ $mysql_pass = '';
 $mysql_database = 'printu';
 
 $origin = 'https://printu.org';
+$active_pass = '';
 
 $xendit_secret_key = '';
 $xendit_success_url = 'http://printu/success.php';
