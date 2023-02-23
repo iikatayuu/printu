@@ -13,7 +13,9 @@ if ($receipt_res->num_rows === 0) die('Invalid params');
 
 $receipt = $receipt_res->fetch_object();
 if ($receipt->paid) {
-  die('This document was already paid');
+  echo 'This document was already paid';
+  header('Location: /');
+  exit;
 }
 
 $no_of_copies = intval($receipt->copies);
