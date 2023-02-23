@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Feb 22, 2023 at 08:47 AM
--- Server version: 8.0.31
--- PHP Version: 8.0.26
+-- Generation Time: Feb 23, 2023 at 11:03 AM
+-- Server version: 8.0.27
+-- PHP Version: 7.4.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,14 +31,14 @@ DROP TABLE IF EXISTS `documents`;
 CREATE TABLE IF NOT EXISTS `documents` (
   `id` int NOT NULL AUTO_INCREMENT COMMENT 'Document unique ID',
   `idnumber` varchar(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Student ID number',
-  `filename` text COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Document original filename',
+  `filename` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Document original filename',
   `copies` int NOT NULL COMMENT 'Number of copies to print',
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Student email address',
   `color` enum('RGB','BW') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Is document colored or black and white',
   `npps` int NOT NULL COMMENT 'Copies per page',
   `upload` varchar(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Uploaded document ID',
   `paid` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Was document paid',
-  `printed` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Was document printed',
+  `printed` int NOT NULL DEFAULT '0' COMMENT 'Document printed pages',
   `payment` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Xendit payment ID',
   `added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Document submission date',
   PRIMARY KEY (`id`)
