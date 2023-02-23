@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/database.php';
+require_once __DIR__ . '/pdf.php';
 require_once __DIR__ . '/utils.php';
 
 cors();
@@ -12,6 +13,7 @@ $receipt_res = $conn->query("SELECT * FROM documents WHERE upload='$upload' LIMI
 if ($receipt_res->num_rows === 0) die('Invalid params');
 
 $receipt = $receipt_res->fetch_object();
+$upload_path = __DIR__ . "/data/$upload.pdf";
 
 header('Content-Type: application/json');
 echo json_encode([
@@ -20,7 +22,8 @@ echo json_encode([
   'copies' => intval($receipt->copies),
   'email' => $receipt->email,
   'color' => $receipt->color,
-  'npps' => intval($receipt->npps)
+  'npps' => intval($receipt->npps),
+  'pages' => get_pdf_pages($upload_path)
 ]);
 
 ?>
