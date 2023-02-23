@@ -23,7 +23,8 @@ echo json_encode([
   'email' => $receipt->email,
   'color' => $receipt->color,
   'npps' => intval($receipt->npps),
-  'pages' => get_pdf_pages($upload_path)
+  'pages' => get_pdf_pages($upload_path),
+  'printed' => intval($receipt->printed)
 ]);
 
 ?>
