@@ -32,6 +32,8 @@ $tmp_path = __DIR__ . "/api/data/$upload";
 
 pdf_generate_images($upload_path, $tmp_path);
 
+$pages = ceil($pages / $npps);
+
 if ($color_profile === 'Grayscale') {
   $grayscaled = $pages * $no_of_copies;
   $total = 3 * $grayscaled;
@@ -39,16 +41,27 @@ if ($color_profile === 'Grayscale') {
 
 if ($color_profile === 'Colored') {
   $ink_coverages = get_ink_coverage($upload_path, $tmp_path);
+  $last = count($ink_coverages);
+  $current = 1;
+  $rgb = false;
+
   foreach ($ink_coverages as $page) {
     if ($page === 'RGB') {
-      $colored = ($colored + 1) * $no_of_copies;
-      $total += 5 * $no_of_copies;
+      $rgb = true;
     }
 
-    if ($page === 'BW') {
-      $grayscaled = ($grayscaled + 1) * $no_of_copies;
-      $total += 3 * $no_of_copies;
+    if ($current % $npps === 0 || $current === $last) {
+      if ($rgb) {
+        $rgb = false;
+        $colored += $no_of_copies;
+        $total += 5 * $no_of_copies;
+      } else {
+        $grayscaled += $no_of_copies;
+        $total += 3 * $no_of_copies;
+      }
     }
+
+    $current++;
   }
 }
 
