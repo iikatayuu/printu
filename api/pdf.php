@@ -67,7 +67,7 @@ function get_ink_coverage ($path, $tmp_path) {
       $b = ($rgb >> 0) & 0xff;
       $luma = ((299 * $r) + (587 * $g) + (114 * $b)) / 1000;
       if ($luma < 40 || $hex === 'ffffff') continue;
-      if ($percentage > 0.2) $is_colored = true;
+      if ($percentage > 0.1) $is_colored = true;
     }
 
     $output[] = $is_colored ? 'RGB' : 'BW';
