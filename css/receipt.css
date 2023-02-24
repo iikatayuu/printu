@@ -1,0 +1,26 @@
+
+.text-block-21 {
+  top: -560px;
+}
+
+.receipt-row {
+  display: flex;
+}
+
+.receipt-row div:first-child {
+  width: 60%;
+}
+
+.receipt-row div:not(:first-child) {
+  width: 20%;
+}
+
+@media screen and (max-width: 479px) {
+  .receipt-row div:first-child {
+    width: 50%;
+  }
+
+  .receipt-row div:not(:first-child) {
+    width: 25%;
+  }
+}

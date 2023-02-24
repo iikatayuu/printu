@@ -113,6 +113,7 @@ $conn->query("UPDATE documents SET payment='$payment' WHERE id=$id");
   <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
   <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
   <link href="images/webclip.png" rel="apple-touch-icon">
+  <link href="css/receipt.css" rel="stylesheet">
 </head>
 <body>
   <div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar-2 w-nav">
@@ -146,13 +147,28 @@ $conn->query("UPDATE documents SET payment='$payment' WHERE id=$id");
     </div><img src="images/receiptUntitled-2.png" loading="lazy" sizes="(max-width: 479px) 100vw, 450px" srcset="images/receiptUntitled-2-p-500.png 500w, images/receiptUntitled-2-p-800.png 800w, images/receiptUntitled-2-p-1080.png 1080w, images/receiptUntitled-2-p-1600.png 1600w, images/receiptUntitled-2.png 1800w" alt="" class="image-9">
     <a href="<?= $payment_url ?>" id="proceed-gcash" class="button-6 w-button">Proceed to Payment</a><img src="images/gcash.png" loading="lazy" sizes="55px" srcset="images/gcash-p-500.png 500w, images/gcash.png 630w" alt="" class="image-10">
     <div class="text-block-21">Date of transcation: <?= $date ?><br>OR #:</div>
-    <div class="text-block-19">Item                                         Qty                Sub</div>
-    <div class="text-block-18">Colored:                                                  <?= $colored ?>                Php<?= number_format($colored * 5, 2) ?><br>Black and white:                                                      <?= $grayscaled ?>                  Php<?= number_format($grayscaled * 3, 2) ?><br>With half page image<br>with full page image</div>
+    <div class="text-block-19 receipt-row">
+      <div>Item</div>
+      <div>Qty</div>
+      <div>Sub</div>
+    </div>
+    <div class="text-block-18" style="width:200px;">
+      <div class="receipt-row">
+        <div>Colored:</div>
+        <div><?= $colored ?></div>
+        <div>Php <?= number_format($colored * 5, 2) ?></div>
+      </div>
+      <div class="receipt-row">
+        <div>Black and white:</div>
+        <div><?= $grayscaled ?></div>
+        <div>Php <?= number_format($grayscaled * 3, 2) ?></div>
+      </div>
+    </div>
     <div class="text-block-20">______________________</div>
     <h1 class="heading-4" style="width:auto;">Total: Php <?= number_format($total, 2) ?></h1>
   </div>
   <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=63c2574b2405e7464ec569cc" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-  <script src="js/default.js"></script>
+  <script src="https://global-uploads.webflow.com/63c2574b2405e7464ec569cc/js/webflow.7f89f715d.js"></script>
     <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
 </body>
 </html>
