@@ -6,6 +6,7 @@ require_once __DIR__ . '/utils.php';
 
 cors();
 
+header('Content-Type: application/json');
 $upload = !empty($_GET['upload']) ? $conn->real_escape_string($_GET['upload']) : null;
 if ($upload === null) {
   die(json_encode([
@@ -25,7 +26,6 @@ if ($receipt_res->num_rows === 0) {
 $receipt = $receipt_res->fetch_object();
 $upload_path = __DIR__ . "/data/$upload.pdf";
 
-header('Content-Type: application/json');
 echo json_encode([
   'success' => true,
   'idnumber' => $receipt->idnumber,
