@@ -159,7 +159,7 @@ $conn->query("UPDATE documents SET payment='$payment' WHERE id=$id");
       <h3 class="heading-3">Print Set-up Selected:</h3>
       <div class="text-block-17">No. of copies: <?= $no_of_copies ?><br>Color profile: <?= $color_profile ?><br>Pages per sheet: <?= $npps ?></div>
     </div><img src="images/receiptUntitled-2.png" loading="lazy" sizes="(max-width: 479px) 100vw, 450px" srcset="images/receiptUntitled-2-p-500.png 500w, images/receiptUntitled-2-p-800.png 800w, images/receiptUntitled-2-p-1080.png 1080w, images/receiptUntitled-2-p-1600.png 1600w, images/receiptUntitled-2.png 1800w" alt="" class="image-9">
-    <a href="<?= $payment_url ?>" id="proceed-gcash" class="button-6 w-button">Proceed to Payment</a><img src="images/gcash.png" loading="lazy" sizes="55px" srcset="images/gcash-p-500.png 500w, images/gcash.png 630w" alt="" class="image-10">
+    <a href="<?= $payment_url ?>" id="proceed-gcash" class="button-6 w-button">Proceed to Payment</a>
     <div class="text-block-21">Date of transcation: <?= $date ?><br>OR #:</div>
     <div class="text-block-19 receipt-row">
       <div>Item</div>
