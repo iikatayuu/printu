@@ -182,7 +182,7 @@ $conn->query("UPDATE documents SET payment='$payment' WHERE id=$id");
     <h1 class="heading-4" style="width:auto;">Total: Php <?= number_format($total, 2) ?></h1>
   </div>
   <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=63c2574b2405e7464ec569cc" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-  <script src="https://global-uploads.webflow.com/63c2574b2405e7464ec569cc/js/webflow.7f89f715d.js"></script>
+  <script src="js/default.js"></script>
     <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
 </body>
 </html>

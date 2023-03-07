@@ -3,6 +3,14 @@ $(document).ready(function () {
   let uploadId = null
   let filename = ''
 
+  $('.w-file-remove-link').on('click', function () {
+    uploadId = null
+    $('.default-state').css('display', 'inline-block')
+    $('.uploading-state').css('display', 'none')
+    $('.w-file-upload-success').css('display', 'none')
+    $('.w-file-upload-error').css('display', 'none')
+  })
+
   $('#pdf-file').on('change', function () {
     const files = $(this).prop('files')
     if (files.length > 0) {
