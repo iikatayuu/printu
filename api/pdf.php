@@ -58,7 +58,7 @@ function get_ink_coverage ($path, $tmp_path) {
     while (strlen($page_str) < 6) $page_str = "0$page_str";
 
     $colors = $extractor->Get_Color("$tmp_path-$page_str.png", 2, 1, 1, 24);
-    $is_colored = false;
+    $colored_percentage = 0;
 
     foreach ($colors as $hex => $percentage) {
       $rgb = intval($hex, 16);
@@ -67,10 +67,10 @@ function get_ink_coverage ($path, $tmp_path) {
       $b = ($rgb >> 0) & 0xff;
       $luma = ((299 * $r) + (587 * $g) + (114 * $b)) / 1000;
       if ($luma < 40 || $hex === 'ffffff') continue;
-      if ($percentage > 0.1) $is_colored = true;
+      else $colored_percentage += $percentage;
     }
 
-    $output[] = $is_colored ? 'RGB' : 'BW';
+    $output[] = $colored_percentage > 0.20 ? 'RGB' : 'BW';
   }
 
   return $output;
