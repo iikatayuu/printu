@@ -98,8 +98,6 @@ curl_setopt($curl, CURLOPT_HTTPHEADER, [
 ]);
 
 $output = curl_exec($curl);
-print_r($output);
-if (!$output) die(curl_error($curl));
 curl_close($curl);
 
 $json = json_decode($output);
