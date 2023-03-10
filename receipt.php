@@ -145,6 +145,7 @@ $json2 = json_decode($output);
 $payment2 = $json2->id;
 $payment_url2 = $json2->actions[0]->url;
 
+$or = random_str(6);
 $conn->query("UPDATE documents SET payment='$payment|$payment2' WHERE id=$id");
 
 ?>
@@ -223,7 +224,7 @@ $conn->query("UPDATE documents SET payment='$payment|$payment2' WHERE id=$id");
     </div>
     <div class="text-block-20">______________________</div>
     <h1 class="heading-4">Total: Php <?= number_format($total, 2) ?></h1>
-    <div class="text-block-21">Date of transcation: <?= $date ?><br>OR #:</div>
+    <div class="text-block-21">Date of transcation: <?= $date ?><br>OR #: <?= $or ?></div>
   </div>
   <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=63c2574b2405e7464ec569cc" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
   <script src="js/default.js"></script>
