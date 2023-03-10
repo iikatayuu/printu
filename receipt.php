@@ -75,7 +75,8 @@ $data = [
       'channel_code' => 'GCASH',
       'channel_properties' => [
         'success_return_url' => "$xendit_success_url?id=$id",
-        'failure_return_url' => "$xendit_failure_url?id=$id"
+        'failure_return_url' => "$origin/receipt.php?id=$id",
+        'cancel_return_url' => "$origin/receipt.php?id=$id"
       ]
     ]
   ],
