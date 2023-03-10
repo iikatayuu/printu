@@ -72,7 +72,7 @@ $data = [
     'type' => 'EWALLET',
     'reusability' => 'ONE_TIME_USE',
     'ewallet' => [
-      'channel_code' => 'PAYMAYA',
+      'channel_code' => 'GCASH',
       'channel_properties' => [
         'success_return_url' => "$xendit_success_url?id=$id",
         'failure_return_url' => "$origin/receipt.php?id=$id",
