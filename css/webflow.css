@@ -1723,6 +1723,14 @@ textarea.w-select {
 }
 @media screen and (max-width: 991px) {
   .w-nav[data-collapse="medium"] .w-nav-menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    width: 100vw;
+    background-color: #C8C8C8;
+  }
+  .w-nav[data-collapse="medium"] .w-nav-menu:not(.active) {
     display: none;
   }
   .w-nav[data-collapse="medium"] .w-nav-button {

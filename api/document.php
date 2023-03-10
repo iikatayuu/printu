@@ -28,7 +28,6 @@ $upload_path = __DIR__ . "/data/$upload.pdf";
 
 echo json_encode([
   'success' => true,
-  'idnumber' => $receipt->idnumber,
   'filename' => $receipt->filename,
   'copies' => intval($receipt->copies),
   'email' => $receipt->email,

@@ -2658,7 +2658,7 @@
 
 .button-6 {
   position: relative;
-  left: -174px;
+  left: -135px;
   top: -118px;
   width: 300px;
   height: 50px;
@@ -2901,7 +2901,7 @@
   left: -1px;
   top: -33px;
   width: 500px;
-  height: 400px;
+  height: 358px;
   border-style: dashed;
   border-width: 5px;
   border-color: #127475;
@@ -2974,7 +2974,7 @@
 .image-18 {
   position: absolute;
   left: 209px;
-  top: 63px;
+  top: 8px;
   width: 60px;
   mix-blend-mode: multiply;
 }
@@ -2994,13 +2994,13 @@
 
 .file-upload {
   position: relative;
-  top: 49px;
+  top: 0px;
 }
 
 .error-message {
   position: absolute;
   left: 141px;
-  top: 153px;
+  top: 100px;
   font-family: 'Open Sans', sans-serif;
   font-size: 10px;
 }
@@ -3015,7 +3015,7 @@
 .uploaded-file {
   position: fixed;
   left: 187px;
-  top: 288.212px;
+  top: 240px;
   border-radius: 15px;
   text-align: center;
 }
@@ -3028,14 +3028,14 @@
 .button-11 {
   position: fixed;
   left: 286px;
-  top: 283.812px;
+  top: 240px;
   border-radius: 15px;
 }
 
 .bold-text-2 {
   position: absolute;
   left: 56px;
-  top: 113.812px;
+  top: 60px;
   width: 400px;
 }
 
@@ -3061,7 +3061,7 @@
 .submit-button-3 {
   position: absolute;
   left: 202px;
-  top: 343px;
+  top: 300px;
   border-radius: 5px;
   font-family: Montserrat, sans-serif;
 }
@@ -3069,14 +3069,14 @@
 .field-label-4 {
   position: absolute;
   left: 12px;
-  top: 219px;
+  top: 170px;
   font-family: Montserrat, sans-serif;
 }
 
 .field-label-5 {
   position: absolute;
   left: 194px;
-  top: 220px;
+  top: 170px;
   font-family: Montserrat, sans-serif;
 }
 
@@ -3096,7 +3096,7 @@
 .select-field-2 {
   position: absolute;
   left: 11px;
-  top: 241px;
+  top: 190px;
   width: 120px;
   height: 30px;
   padding-top: 5px;
@@ -3109,7 +3109,7 @@
 .field-label-6 {
   position: absolute;
   left: 339px;
-  top: 220px;
+  top: 170px;
   width: 150px;
   font-family: Montserrat, sans-serif;
 }
@@ -3117,7 +3117,7 @@
 .select-field-3 {
   position: absolute;
   left: 345px;
-  top: 242px;
+  top: 190px;
   width: 120px;
   height: 30px;
   padding-top: 5px;
@@ -3130,14 +3130,14 @@
 .field-label-7 {
   position: absolute;
   left: 213px;
-  top: 278px;
+  top: 230px;
   font-family: Montserrat, sans-serif;
 }
 
 .text-field-5 {
   position: absolute;
   left: 124px;
-  top: 301px;
+  top: 255px;
   width: 250px;
   height: 30px;
   border-radius: 15px;
@@ -3149,7 +3149,7 @@
 .select-field-4 {
   position: absolute;
   left: 191px;
-  top: 242px;
+  top: 190px;
   width: 120px;
   height: 30px;
   padding-top: 5px;
@@ -3534,7 +3534,7 @@
     left: -91px;
     top: -238px;
     width: 375px;
-    height: 500px;
+    height: 458px;
   }
 
   .text-field-3 {
@@ -3572,12 +3572,12 @@
   .image-18 {
     position: absolute;
     left: 148px;
-    top: 62px;
+    top: 8px;
   }
 
   .error-message {
     left: 66px;
-    top: 153px;
+    top: 100px;
   }
 
   .uploaded-file {
@@ -3595,7 +3595,7 @@
   .bold-text-2 {
     position: absolute;
     left: -18px;
-    top: 106.812px;
+    top: 60px;
     font-size: 15px;
   }
 
@@ -3605,17 +3605,17 @@
 
   .submit-button-3 {
     left: 142px;
-    top: 445px;
+    top: 400px;
   }
 
   .field-label-4 {
     left: 112px;
-    top: 226px;
+    top: 170px;
   }
 
   .field-label-5 {
     left: 134px;
-    top: 280px;
+    top: 225px;
   }
 
   .select-field {
@@ -3625,32 +3625,32 @@
 
   .select-field-2 {
     left: 124px;
-    top: 246px;
+    top: 190px;
   }
 
   .field-label-6 {
     left: 119px;
-    top: 328px;
+    top: 280px;
   }
 
   .select-field-3 {
     left: 124px;
-    top: 351px;
+    top: 300px;
   }
 
   .field-label-7 {
     left: 160px;
-    top: 386px;
+    top: 340px;
   }
 
   .text-field-5 {
     left: 62px;
-    top: 410px;
+    top: 360px;
   }
 
   .select-field-4 {
     left: 124px;
-    top: 301px;
+    top: 245px;
   }
 }
 
