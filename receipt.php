@@ -65,6 +65,7 @@ if ($color_profile === 'Colored') {
   }
 }
 
+// GCASH
 $data = [
   'currency' => 'PHP',
   'amount' => $total,
@@ -103,7 +104,48 @@ curl_close($curl);
 $json = json_decode($output);
 $payment = $json->id;
 $payment_url = $json->actions[0]->url;
-$conn->query("UPDATE documents SET payment='$payment' WHERE id=$id");
+
+// PAYMAYA
+$data = [
+  'currency' => 'PHP',
+  'amount' => $total,
+  'payment_method' => [
+    'type' => 'EWALLET',
+    'reusability' => 'ONE_TIME_USE',
+    'ewallet' => [
+      'channel_code' => 'PAYMAYA',
+      'channel_properties' => [
+        'success_return_url' => "$xendit_success_url?id=$id",
+        'failure_return_url' => "$origin/receipt.php?id=$id",
+        'cancel_return_url' => "$origin/receipt.php?id=$id"
+      ]
+    ]
+  ],
+  'customer_id' => guidv4(),
+  'metadata' => ['id' => $id]
+];
+
+$token = base64_encode("$xendit_secret_key:");
+$curl = curl_init();
+curl_setopt($curl, CURLOPT_URL, 'https://api.xendit.co/payment_requests');
+curl_setopt($curl, CURLOPT_POST, 1);
+curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($curl, CURLOPT_CAINFO, __DIR__ . '/api/cacert.pem');
+curl_setopt($curl, CURLOPT_HTTPHEADER, [
+  'Accept: application/json',
+  'Content-Type: application/json',
+  "Authorization: Basic $token"
+]);
+
+$output = curl_exec($curl);
+curl_close($curl);
+
+$json2 = json_decode($output);
+$payment2 = $json2->id;
+$payment_url2 = $json2->actions[0]->url;
+
+$conn->query("UPDATE documents SET payment='$payment|$payment2' WHERE id=$id");
 
 ?>
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
@@ -158,15 +200,16 @@ $conn->query("UPDATE documents SET payment='$payment' WHERE id=$id");
     <div class="div-block-7">
       <h3 class="heading-3">Print Set-up Selected:</h3>
       <div class="text-block-17">No. of copies: <?= $no_of_copies ?><br>Color profile: <?= $color_profile ?><br>Pages per sheet: <?= $npps ?></div>
-    </div><img src="images/receiptUntitled-2.png" loading="lazy" sizes="(max-width: 479px) 100vw, 450px" srcset="images/receiptUntitled-2-p-500.png 500w, images/receiptUntitled-2-p-800.png 800w, images/receiptUntitled-2-p-1080.png 1080w, images/receiptUntitled-2-p-1600.png 1600w, images/receiptUntitled-2.png 1800w" alt="" class="image-9">
-    <a href="<?= $payment_url ?>" id="proceed-gcash" class="button-6 w-button">Proceed to Payment</a>
-    <div class="text-block-21">Date of transcation: <?= $date ?><br>OR #:</div>
+    </div>
+    <img src="images/receiptUntitled-2.png" loading="lazy" sizes="(max-width: 479px) 100vw, 450px" srcset="images/receiptUntitled-2-p-500.png 500w, images/receiptUntitled-2-p-800.png 800w, images/receiptUntitled-2-p-1080.png 1080w, images/receiptUntitled-2-p-1600.png 1600w, images/receiptUntitled-2.png 1800w" alt="" class="image-9">
+    <a href="<?= $payment_url ?>" id="proceed-gcash" class="button-6 w-button">Proceed to Payment (GCASH)</a>
+    <a href="<?= $payment_url2 ?>" id="proceed-paymaya" class="button-paymaya w-button">Proceed to Payment (PAYMAYA)</a>
     <div class="text-block-19 receipt-row">
       <div>Item</div>
       <div>Qty</div>
       <div>Sub</div>
     </div>
-    <div class="text-block-18" style="width:200px;">
+    <div class="text-block-18">
       <div class="receipt-row">
         <div>Colored:</div>
         <div><?= $colored ?></div>
@@ -179,7 +222,8 @@ $conn->query("UPDATE documents SET payment='$payment' WHERE id=$id");
       </div>
     </div>
     <div class="text-block-20">______________________</div>
-    <h1 class="heading-4" style="width:auto;">Total: Php <?= number_format($total, 2) ?></h1>
+    <h1 class="heading-4">Total: Php <?= number_format($total, 2) ?></h1>
+    <div class="text-block-21">Date of transcation: <?= $date ?><br>OR #:</div>
   </div>
   <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=63c2574b2405e7464ec569cc" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
   <script src="js/default.js"></script>

@@ -2579,10 +2579,8 @@
 }
 
 .div-block-7 {
-  position: relative;
-  left: 340px;
-  top: -17px;
-  width: 350px;
+  margin: auto;
+  width: 260px;
   height: 400px;
 }
 
@@ -2599,48 +2597,41 @@
   left: 234px;
   top: -338px;
   width: 450px;
+  z-index: -1;
 }
 
 .text-block-18 {
-  position: relative;
-  left: 367px;
-  top: -687px;
-  width: 100px;
+  width: 200px;
+  margin: auto;
   font-family: 'PT Serif', serif;
   font-size: 8px;
   line-height: 12px;
 }
 
 .text-block-19 {
-  position: relative;
-  left: 369px;
-  top: -688px;
   width: 200px;
   font-family: 'PT Serif', serif;
   font-size: 10px;
+  margin-top: -725px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .text-block-20 {
-  position: relative;
-  left: 368px;
-  top: -699px;
   width: 200px;
+  margin: auto;
 }
 
 .heading-4 {
-  position: relative;
-  left: 368px;
-  top: -720px;
-  width: 100px;
+  width: 200px;
+  margin: auto;
   font-family: 'PT Serif', serif;
   font-size: 20px;
 }
 
 .text-block-21 {
-  position: relative;
-  left: 371px;
-  top: -530px;
-  width: 250px;
+  width: 200px;
+  margin: auto;
   font-size: 9px;
 }
 
@@ -2652,16 +2643,27 @@
   width: 55px;
 }
 
-.container-2 {
-  position: relative;
-}
-
 .button-6 {
   position: relative;
   left: -135px;
   top: -118px;
   width: 300px;
   height: 50px;
+  padding-top: 13px;
+  border-radius: 11px;
+  background-color: #388bf5;
+  font-family: Montserrat, sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.button-paymaya {
+  position: relative;
+  left: 318px;
+  top: -300px;
+  width: 300px;
+  height: 64px;
   padding-top: 13px;
   border-radius: 11px;
   background-color: #388bf5;
@@ -3326,49 +3328,15 @@
     top: 69px;
   }
 
-  .div-block-7 {
-    margin-top: 6px;
-    margin-left: -295px;
-  }
-
   .image-9 {
     left: 229px;
     top: -329px;
     margin-left: -245px;
   }
 
-  .text-block-18 {
-    left: 401px;
-    top: -743px;
-    margin-left: -290px;
-  }
-
   .text-block-19 {
-    left: 406px;
-    top: -752px;
-    margin-top: -23px;
-    margin-left: -293px;
+    margin-top: -700px;
     font-size: 8px;
-  }
-
-  .text-block-20 {
-    left: 406px;
-    top: -751px;
-    margin-left: -298px;
-  }
-
-  .heading-4 {
-    left: 412px;
-    top: -774px;
-    margin-left: -301px;
-  }
-
-  .text-block-21 {
-    left: 409px;
-    top: -594px;
-    margin-top: -17px;
-    margin-bottom: 20px;
-    margin-left: -299px;
   }
 
   .image-10 {
@@ -3380,6 +3348,13 @@
   .button-6 {
     left: 54px;
     top: -330px;
+    margin-top: -7px;
+    margin-bottom: 9px;
+  }
+
+  .button-paymaya {
+    left: 54px;
+    top: -325px;
     margin-top: -7px;
     margin-bottom: 9px;
   }
