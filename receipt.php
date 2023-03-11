@@ -145,7 +145,7 @@ $json2 = json_decode($output);
 $payment2 = $json2->id;
 $payment_url2 = $json2->actions[0]->url;
 
-$or = random_str(6);
+$or = random_str(6, '0123456789');
 $conn->query("UPDATE documents SET payment='$payment|$payment2' WHERE id=$id");
 
 ?>

@@ -1,7 +1,6 @@
 <?php
 
-function random_str ($length = 10) {
-  $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+function random_str ($length = 10, $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ') {
   $charactersLength = strlen($characters);
   $randomString = '';
 
