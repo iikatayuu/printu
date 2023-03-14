@@ -1,5 +1,6 @@
 
 $(document).ready(function () {
+  let form = null
   let uploadId = null
   let filename = ''
 
@@ -53,7 +54,24 @@ $(document).ready(function () {
       return
     }
 
-    const form = $(this).get(0)
+    form = $(this).get(0)
+    const files = $('#pdf-file').prop('files')
+    const src = URL.createObjectURL(files[0])
+    $('#pdf-embed').attr('src', src)
+    modal('#pdf-embed-modal', 'open')
+  })
+
+  $('#form-confirm').click(async function () {
+    if (form === null) {
+      alert('Invalid action')
+      return
+    }
+
+    if (uploadId === null) {
+      alert('Please upload your file first')
+      return
+    }
+
     const formdata = new FormData(form)
     formdata.delete('file-2')
     formdata.append('file', uploadId)

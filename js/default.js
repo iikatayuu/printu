@@ -1,5 +1,25 @@
 
+function modal (selector, action) {
+  $('.modal-container.active').removeClass('active')
+  $('.modal.active').removeClass('active')
+
+  if (action === 'open') {
+    $('.modal-container').addClass('active')
+    $(selector).addClass('active')
+  } else {
+    $(selector).removeClass('active')
+  }
+}
+
 $(document).ready(function () {
+  $(document).on('click', function (event) {
+    const isModal = $(event.target).parents('.modal').length > 0 || $(event.target).is('.modal')
+    if (!isModal) {
+      $('.modal-container.active').removeClass('active')
+      $('.modal.active').removeClass('active')
+    }
+  })
+
   $(document).on('click', function (event) {
     const isDropdown = $(event.target).parents('.w-dropdown').length > 0 || $(event.target).is('.w-dropdown')
     if (!isDropdown) $('.w-dropdown-list.w--open').removeClass('w--open')

@@ -1,0 +1,37 @@
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 40px;
+  left: calc(100vw / 2);
+  transform: translateX(-50%);
+  z-index: 1000;
+  padding: 0;
+}
+
+.modal-container {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(4px);
+}
+
+.modal-container.active,
+.modal.active {
+  display: block;
+}
+
+#pdf-embed-modal.active {
+  display: flex !important;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+#form-confirm {
+  margin-top: 8px;
+}
