@@ -35,3 +35,10 @@
 #form-confirm {
   margin-top: 8px;
 }
+
+@media screen and (max-width: 479px) {
+  #pdf-embed {
+    width: 250px;
+    height: 375px;
+  }
+}
